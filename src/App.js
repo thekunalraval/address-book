@@ -1,42 +1,98 @@
+// App.js
+
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
-import Create from './components/create.component';
-import Edit from './components/edit.component';
-import Index from './components/index.component';
+export default class Create extends Component {
+    constructor(props) {
+        super(props);
+        this.onChangeFirstName = this.onChangeFirstName.bind(this);
+        this.onChangeLastName = this.onChangeLastName.bind(this);
+        this.onChangeEmail = this.onChangeEmail.bind(this);
+        this.onChangeContact = this.onChangeContact.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
 
-class App extends Component {
+        this.state = {
+            first_name: '',
+            last_name: '',
+            email :'',
+            contact:''
+        }
+    }
+    onChangeFirstName(e) {
+        this.setState({
+            first_name: e.target.value
+        });
+    }
+    onChangeLastName(e) {
+        this.setState({
+            last_name: e.target.value
+        })
+    }
+    onChangeEmail(e) {
+        this.setState({
+            email: e.target.value
+        })
+    }
+    onChangeContact(e) {
+        this.setState({
+            contact: e.target.value
+        })
+    }
+
+    onSubmit(e) {
+        e.preventDefault();
+        console.log(`The values are ${this.state.first_name}, ${this.state.last_name}, ${this.state.email} and ${this.state.contact}`)
+        this.setState({
+            first_name: '',
+            last_name: '',
+            email: '',
+            contact: ''
+        })
+    }
+
     render() {
         return (
-            <Router>
-                <div className="container">
-                    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                        <Link to={'/'} className="navbar-brand">AddressBook</Link>
-                        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul className="navbar-nav mr-auto">
-                                <li className="nav-item">
-                                    <Link to={'/'} className="nav-link">Home</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to={'/create'} className="nav-link">Create</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to={'/index'} className="nav-link">Index</Link>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav> <br/>
-                    <h2>Welcome to AddressBook</h2> <br/>
-                    <Switch>
-                        <Route exact path='/create' component={ Create } />
-                        <Route path='/edit/:id' component={ Edit } />
-                        <Route path='/index' component={ Index } />
-                    </Switch>
-                </div>
-            </Router>
-        );
+            <div style={{ marginTop: 10 }}>
+                <h3>Add New User</h3>
+                <form onSubmit={this.onSubmit}>
+                    <div className="form-group">
+                        <label>First Name:  </label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={this.state.first_name}
+                            onChange={this.onChangeFirstName}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Last Name: </label>
+                        <input type="text"
+                               className="form-control"
+                               value={this.state.last_name}
+                               onChange={this.onChangeLastName}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Email: </label>
+                        <input type="text"
+                               className="form-control"
+                               value={this.state.email}
+                               onChange={this.onChangeEmail}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Contact: </label>
+                        <input type="text"
+                               className="form-control"
+                               value={this.state.contact}
+                               onChange={this.onChangeContact}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <input type="submit" value="Register User" className="btn btn-primary"/>
+                    </div>
+                </form>
+            </div>
+        )
     }
 }
-
-export default App;
