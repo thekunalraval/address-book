@@ -32,6 +32,14 @@ class App extends Component {
                         <Route path='/edit/:id' component={ Edit } />
                         <Route path='/index' component={ Index } />
                     </Switch>
+                    <div className="jumbotron jumbotron-fluid">
+                        <div className="container">
+                            <h1 className="display-4">My Business AddressBook</h1>
+                            <br/>
+                            <br/>
+                            <div className="float-right">Created By: Kunal Raval</div>
+                        </div>
+                    </div>
                 </div>
             </Router>
         );
